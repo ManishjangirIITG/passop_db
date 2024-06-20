@@ -12,7 +12,7 @@ const Footer = () => {
                 </div>
             <div className='flex justify-center'>
 
-                Created with <img className='w-6 mx-1' src="/public/images/heart.png" alt="heart image" /> and react codealong Manish Jangir :)
+                Created with <img className='w-6 mx-1' src="./images/heart.png" alt="heart image" /> and react codealong Manish Jangir :)
             </div>
         </div>
     )
