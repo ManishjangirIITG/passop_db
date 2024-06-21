@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './Manager.css'
 
 
+
 const Manager = () => {
     const ref = useRef()
     const passwordRef = useRef()
@@ -13,7 +14,9 @@ const Manager = () => {
     const [passwordArray, setpasswordArray] = useState([])
 
     const getPasswords = async () => {
-        let req = await fetch("http://localhost:3000/")
+        // const liveSiteURL = window.location.origin;
+        // connectdb();
+        let req = await fetch(``);
         let passwords = await req.json()
         setpasswordArray(passwords)
 
@@ -56,7 +59,7 @@ const Manager = () => {
 
             if (form.id) {
                 // Update existing password
-                await fetch("http://localhost:3000/update", {
+                await fetch("/update", {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(form)
@@ -93,7 +96,7 @@ const Manager = () => {
             else {
                 // Add new Password
                 const newPassword = { ...form, id: uuidv4() };
-                await fetch("http://localhost:3000/", {
+                await fetch("/", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(newPassword)
@@ -125,7 +128,7 @@ const Manager = () => {
         let cfm = confirm("Do you really want to delete this password?")
         if (cfm) {
             setpasswordArray(passwordArray.filter(item => item.id !== id))
-            await fetch("http://localhost:3000/", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id }) })
+            await fetch("/", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id }) })
 
             // localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item => item.id !== id)))
             toast('Password Deleted Successfully', {
@@ -169,7 +172,7 @@ const Manager = () => {
                     <span className="text-green-500">OP/&gt;</span>
                 </h1>
                 <p className='text-green-900 text-lg  text-center'>Your own Password Manager</p>
-                <div className="text-black flex flex-col p-4 gap-4 items-center">
+                <div className="text-black flex flex-col w-[80%] mx-auto p-4 gap-4 items-center">
                     <input value={form.site} onChange={handleChange} placeholder='Enter Website URL' className='rounded-full border border-green-500 w-full p-4 py-1 text-black' type="text" name="site" id="site" />
                     <div className="flex flex-col md:flex-row w-full gap-3">
                         <input value={form.username} onChange={handleChange} placeholder='Enter Username' className='rounded-full border border-green-500 w-full p-4 py-1 text-black' type="text" name='username' id='username' />
@@ -196,7 +199,7 @@ const Manager = () => {
                     {passwordArray.length != 0 &&
                         <div className="table-responsive">
 
-                            < table className="table-auto w-full overflow-hidden rounded-md my-4">
+                            < table className="table-auto w-[80%] mx-auto overflow-hidden rounded-md my-4">
                                 <thead className='bg-green-800 text-white'>
                                     <tr>
                                         <th className='py-2'>Site</th>
